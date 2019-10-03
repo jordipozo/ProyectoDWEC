@@ -5,7 +5,7 @@
 <title>Detección de palíndromos</title>
 
 <script type="text/javascript">
-function palindromo(cadena) {
+function palindromo(cadena) {  //La declaración de la función se hace dentro del <head>
 
   var resultado = "La cadena \""+cadena+"\" \n";
 
@@ -39,20 +39,21 @@ function palindromo(cadena) {
   }
 
   if(iguales) {
-    resultado += " es un palíndromo";
+    resultado += " es un palindromo";
   }
   else {
-    resultado += " no es un palíndromo";
+    resultado += " no es un palindromo";
   }
 
   return resultado;
 }
-
-alert(palindromo("La ruta nos aporto otro paso natural"));
-alert(palindromo("Esta frase no se parece a ningun palindromo"));
 </script>
 </head>
 
 <body>
+  <script type="text/javascript"> //La llamada a la función se hace desde el body
+    alert(palindromo("La ruta nos aporto otro paso natural"));
+    alert(palindromo("Esta frase no se parece a ningun palindromo"));
+  </script>
 </body>
 </html>
