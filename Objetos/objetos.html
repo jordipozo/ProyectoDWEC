@@ -8,7 +8,7 @@
     <script>
     
     function Star(constelacion,tipo,claseEspectral,magnitud){
-        this.constelacion=constelacion;
+        this.nombre=constelacion;
         this.tipo= tipo;
         this.claseEspectral= claseEspectral;
         this.magnitud=magnitud;
@@ -18,7 +18,10 @@
 <body>
     <script >
             var Polaris =new Star ("Polaris","Ursa Minor","Doble/Cefeida","F7",2.0);
-            console.log(Polaris.constelacion);    
+            console.log(Polaris.nombre);  
+            console.log(Polaris.claseEspectral);
+            console.log(Polaris.tipo);
+            console.log(Polaris.magnitud);
         
     </script>
     </body>
