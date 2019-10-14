@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
 ↓ INSTRUCCIONES DEL EJERCICIO ↓
-Cree un script que defina un objeto llamado Producto_alimenticio.
+Cree un script que defina un objeto llamado Producto.
 Este objeto debe presentar las propiedades código, nombre y precio, además del método imprimeDatos, el cual escribe por pantalla los valores de sus propiedades.
 Posteriormente, cree tres instancias de este objeto y guárdelas en un array.
 Posteriormente, utilice el método imprimeDatos para mostrar por pantalla los valores de los tres objetos instanciados.
@@ -12,13 +12,13 @@ Posteriormente, utilice el método imprimeDatos para mostrar por pantalla los va
         <title>Crear Objetos</title>
         <script>
             var mi_array = [];
-            function Producto_alimenticio(codigo, nombre, precio) {
+            function Producto(codigo, nombre, precio) {
                 this.codigo = codigo;
                 this.nombre = nombre;
                 this.precio = precio;
                 this.imprimeDatos = function() {
                     var pintar = '';
-                    for (let x in this) {
+                    for (let x in this) {      // el bucle for..in recorre todos los elementos del array
                         if (typeof this[x] != 'function') {
                             pintar += x + ' → ' + this[x] + '<br />';
                         }
@@ -26,9 +26,9 @@ Posteriormente, utilice el método imprimeDatos para mostrar por pantalla los va
                     return pintar;
                 }
             }
-            mi_array[0] = new Producto_alimenticio(01, 'Moscatel', 5);
-            mi_array[1] = new Producto_alimenticio(02, 'Tarta', 12);
-            mi_array[2] = new Producto_alimenticio(03, 'Queso', 6);
+            mi_array[0] = new Producto(01, 'Moscatel', 5);
+            mi_array[1] = new Producto(02, 'Tarta', 12);
+            mi_array[2] = new Producto(03, 'Queso', 6);
             for (let x of mi_array) {
                 document.write(x.imprimeDatos() + '<br />');
             }
