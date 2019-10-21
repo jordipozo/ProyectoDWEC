@@ -5,6 +5,8 @@ function Mascota(tipo, nombre, peso, aficiones){
     this.aficiones=aficiones;
 }
 
+
+
 window.onload=init;
 // serializando el objeto (usamos método stringify)
 function init(){
