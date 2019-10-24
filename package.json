@@ -1,0 +1,22 @@
+{
+  "name": "proyectodwec",
+  "version": "1.0.0",
+  "description": "proyecto DWEC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jordipozo/ProyectoDWEC.git"
+  },
+  "author": "Jordi Pozo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jordipozo/ProyectoDWEC/issues"
+  },
+  "homepage": "https://github.com/jordipozo/ProyectoDWEC#readme",
+  "dependencies": {
+    "eslint-plugin-html": "^6.0.0"
+  }
+}
