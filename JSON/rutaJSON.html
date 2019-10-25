@@ -7,29 +7,24 @@
     <title>Document</title>
 </head>
 <body>
-   // <button id="myButton" onclick="accessObject(objeto,'C:\jpc\archivo1.json')">Pulsa aquí</button>
-   <script type="text/javascript" src="c:\jpc\archivo1.json">
-    
-    objeto=JSON.parse(archivo1);
-    function accessObject(obj,route="") {
-        console.log(route);
-        console.log(objeto);
-        if(JSON.stringify(obj)!='{}') {
-            for(x in obj) {
-                if(typeof(obj[x])==typeof({})) {
-                    if(obj[x]!=null)
-                        accessObject(obj[x],route + " -> " + x);
-                } else {
-                    console.log(route + " - " + x + " -----> " + obj[x]);
-                }
-            }
-        } else {
-            console.log(obj)
+ <script>
+function readTextFile(file, callback) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.overrideMimeType("application/json");
+    rawFile.open("GET", file, true);
+    rawFile.onreadystatechange = function() {
+        if (rawFile.readyState === 4 && rawFile.status == "200") {
+            callback(rawFile.responseText);
         }
     }
-    
-   // accessObject(myObject);
-   accessObject(objeto)
+    rawFile.send(null);
+}
+
+//usage:
+readTextFile("/Users/jpozoc/cargasJS/artists.json", function(text){
+    var data = JSON.parse(text);
+    console.log(data);
+});
 </script>
 </body>
 </html>
