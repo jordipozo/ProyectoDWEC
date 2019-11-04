@@ -17,8 +17,8 @@
         alert(miCookie);
     }
 
-    function getCookie(name){
-        var nombre=name+"=";
+    function getCookie(cname){
+        var nombre=cname+"=";
         var dc=document.cookie;
         if (dc.length>0){
             begin=dc.indexOf(cname);
@@ -32,6 +32,9 @@
         return null;
     }
     setCookie("Flores","10","","","",false);
+    setCookie("Jordi","Cookie de JPC","","","",false);
+    alert(getCookie("Flores"));
+    alert(getCookie("Jordi"));
     </script>
 </body>
 </html>
