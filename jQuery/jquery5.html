@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script src='//code.jquery.com/jquery-3.1.0.js'></script>
+    <script src='https://code.jquery.com/jquery-3.1.0.js'></script>
     <script>$(document).ready(function() {
             $("tr").click(function(){
                 alert("Click en TR");
             });
             $("a").click(function(evento){
                 alert("Click en A");
-               // evento.stopPropagation(); //detenemos propagación en burbuja del evento (bubbling)
+                evento.stopPropagation(); //detenemos propagación en burbuja del evento (bubbling)
             });
             $('#selectorMarcas').bind('change',function(){            
                 alert("Marca seleccionada: "+ $("#selectorMarcas option:selected").text());
