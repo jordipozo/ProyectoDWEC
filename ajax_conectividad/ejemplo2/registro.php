@@ -22,16 +22,16 @@ if(HayHack($_POST['cedula']) || HayHack($_POST['nombre']) ||HayHack($_POST['fech
 else
 {
     //variables POST
-    $cedu = $_POST['idLike'];
-    $nom = $_POST['name'];
-    $fech = $_POST['numLikes'];
-    $cargo = $_POST['date'];
+    $cedu = $_POST['cedula'];
+    $nom = $_POST['nombre'];
+    $fech = $_POST['fecha'];
+    $cargo = $_POST['cargo'];
     //consulta mysql para insertar los datos del empleados
-    $consulta = "INSERT INTO tbl_Likes VALUES ('" .$cedu. "','" .$nom. "','" .$fech. "','" .$cargo. "')";
+    $consulta = "INSERT INTO empleados VALUES ('" .$cedu. "','" .$nom. "','" .$fech. "','" .$cargo. "')";
     mysqli_query($con, $consulta);
     if($consulta)
     {            
-        echo "Registro Guardado Correctamente";
+        echo "Empleado Guardado Correctamente";
     }
     else
     {
@@ -39,3 +39,4 @@ else
     }
 }
 ?>
+

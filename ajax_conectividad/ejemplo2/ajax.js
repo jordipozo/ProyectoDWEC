@@ -3,16 +3,16 @@ window.onload = function () {
 }
 function Registrar()
 {
-    var cedu = $("#idLike").val();
-    var nom = $("#name").val();
-    var fech = $("#numLikes").val();
-    var carg = $("#date").val();
+    var cedu = $("#cedula").val();
+    var nom = $("#nombre").val();
+    var fech = $("#fecha").val();
+    var carg = $("#cargo").val();
     $("#respuesta").html("Por favor espera un momento");
     $.ajax({
         type: "POST",
         dataType: 'html',
         url: "registro.php",
-        data: "identLike="+cedu+"&nombre="+nom+"&num_Likes="+fech+"&fechaUltLike="+carg,
+        data: "cedula="+cedu+"&nombre="+nom+"&fecha="+fech+"&cargo="+carg,
         success: function(resp){
             $('#respuesta').html(resp);
             Limpiar();
@@ -26,8 +26,8 @@ function Cargar()
 }
 function Limpiar()
 {
-    $("#idLike").val("");
-    $("#name").val("");
-    $("#numLikes").val("");
-    $("#date").val("");
+    $("#cedula").val("");
+    $("#nombre").val("");
+    $("#fecha").val("");
+    $("#cargo").val("");
 }
