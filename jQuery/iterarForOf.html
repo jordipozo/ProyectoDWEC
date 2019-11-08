@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <style type="text/css">
+        .ocultar{
+            display: none;
+        }
+    </style>
+    <h1 class="titulo">PRUEBAS DE JQuery - Iteraciones</h1>
+    <!-- <p id="parrafo1"class="prueba ocultar">Párrafo de prueba</p> -->
+    <p id="parrafo1"class="">Párrafo de prueba</p>
+    <div>Contenido del DIV</div>
+</body>
+<script src='https://code.jquery.com/jquery-3.1.0.js'></script>
+<script>
+    $(document).ready(function(){
+        var numbers=[1,4,5,2];
+        for(let num of numbers){
+            console.log(num);
+        }
+
+        var colors=[{
+            "colors":[{
+                "colorName":"red",
+                "hexValue":"#f00"
+            },
+            {
+                "colorName":"green",
+                "hexValue":"#0f0"
+            },
+            {
+                "colorName":"blue",
+                "hexValue":"#00f"
+            }]
+        }];
+        for(let color of colors){
+            console.log(color.colors[0].colorName); //accedemos al nombre del primer elemento
+            console.log(color.colors[1].hexValue+"-"+color.colors[1].colorName);//accedemos al valor hexadecimal del segundo elemento y a su nombre
+        }
+    });
+
+</script>
+
+</html>

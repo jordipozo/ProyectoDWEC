@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Opciones de .ready()</h1>
+
+    <script src='https://code.jquery.com/jquery-3.1.0.js'></script>
+    <script>
+       $.when($.ready, $.getScript("index.js")).then(function(){
+           //el documento esta preparado y el fichero index.js se ha cargado
+            console.log("se ha ejecutado sin problemas");
+        }).catch(function(){
+            //en caso de error
+            console.log("error de fichero");
+         });
+    </script>
+</body>
+</html>

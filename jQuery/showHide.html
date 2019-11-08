@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <style type="text/css">
+        .ocultar{
+            display: none;
+        }
+    </style>
+    <h1 class="titulo">PRUEBAS DE JQuery - show/hide</h1>
+    <!-- <p id="parrafo1"class="prueba ocultar">Párrafo de prueba</p> -->
+    <p id="parrafo1"class="">Párrafo de prueba</p>
+    <div>Contenido del DIV</div>
+</body>
+<script src='https://code.jquery.com/jquery-3.1.0.js'></script>
+<script>
+    $(document).ready(function(){
+
+        $('#parrafo1').css({'background-color':'red', 'text-align':'center'});
+        if ($('#parrafo1').hasClass('prueba')){
+            alert('Pertenece a la clase prueba');
+            $('#parrafo1').show(3000); //mostramos el contenido en 3 segundos
+        }else{
+            alert('No pertenece a la clase saludo');
+            $('div').hide(3000);
+        }
+    });
+</script>
+
+</html>

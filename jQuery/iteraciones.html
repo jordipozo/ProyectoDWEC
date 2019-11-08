@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <style type="text/css">
+        .ocultar{
+            display: none;
+        }
+    </style>
+    <h1 class="titulo">PRUEBAS DE JQuery - Iteraciones</h1>
+    <!-- <p id="parrafo1"class="prueba ocultar">Párrafo de prueba</p> -->
+    <p id="parrafo1"class="">Párrafo de prueba</p>
+    <div>Contenido del DIV</div>
+</body>
+<script src='https://code.jquery.com/jquery-3.1.0.js'></script>
+<script>
+    $(document).ready(function(){
+
+        var numbers=[1,2,3,4,5,8,10];
+    //------ Opcion 1 para iterar    
+    //    $.each(numbers,function(i,value){
+    //        console.log(i+":"+value);
+    //------
+    //------- Opción 2 para iterar
+        for(var i =0;i<numbers.length;i++){
+            console.log(numbers[i]);
+        }
+    //----    
+    });
+
+</script>
+
+</html>

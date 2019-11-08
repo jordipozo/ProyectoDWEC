@@ -1,0 +1,23 @@
+<html>
+   <head>
+   <meta http-equiv="content-type" content="text/html;charset=utf-8"> 
+    <title>Sub-Documento</title>
+      <script type="text/javascript"> 
+         function copiarAlPadre() {
+            opener.document.getElementById("original").value=document.getElementById('textocopiar').value; 
+        } 
+     </script> 
+   </head>
+   <body>
+     <h1>Sub-Ventana</h1> 
+     <form id="formulario"> 
+      <p>
+      <label for="textocopiar">Introduzca principal:</label>
+      <input type="text" id="textocopiar"/> 
+      </p> 
+      <p> 
+       <input type="button" value="Enviar" onclick="copiarAlPadre()" /> 
+      </p> 
+     </form> 
+   </body>
+</html>
