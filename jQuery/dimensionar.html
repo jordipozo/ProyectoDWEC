@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="titulo">PRUEBAS DE JQuery - Getters y Setters</h1>
+    <p id="parrafo1" class="titulo">Párrafo de prueba</p>
+    <img id="avatar" src="/jQuery/img/avatarJPC2019.jpg" alt="">
+    <div>Contenido del DIV</div>
+</body>
+<script src='https://code.jquery.com/jquery-3.1.0.js'></script>
+<script>
+    $(document).ready(function(){
+        //metodo ATTR
+        $('#avatar').click(function(){
+           //redimensionamos la imagen  
+           //$('#avatar').width(300).height(300);  
+
+           //Mostramos dimensiones de la imagen
+            var h=$('#avatar').height();
+            alert("Altura: "+h+" pixels");
+            
+            var w=$('#avatar').width();
+            alert("Anchura: "+w+" pixels");
+
+        })
+
+    });
+</script>
+
+</html>
