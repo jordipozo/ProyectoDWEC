@@ -1,0 +1,28 @@
+ <!DOCTYPE html> 
+  <html> 
+       <head> 
+         <meta charset="utf−8"> 
+         <title>Comprobación creación objeto AJAX - según modelo navegador</title>
+          <script> 
+           if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ 
+             httpRequest = new XMLHttpRequest();
+              console.log("Creado el objeto a partir de XMLHttpRequest."); 
+               } else if (window.ActiveXObject) { // IE 6 i anteriors 
+                httpRequest = new ActiveXObject("Microsoft.XMLHTTP"); 
+                console.log("Creado el objeto a partir d’ActiveXObject."); 
+             } else { 
+                  console.error("Error: Este navegador no admite AJAX."); 
+                   } 
+                   httpRequest.onreadystatechange = procesarCambioEstado;
+
+                    httpRequest.open('GET', 'provincias.xml', true);
+                    httpRequest.send(null);
+
+                    function procesarCambioEstado() {
+                    console.log("Ha cambiado el estado de la petición");
+                    }
+             </script> 
+            </head> 
+        <body> 
+        </body>
+</html>
