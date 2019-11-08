@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="titulo">PRUEBAS DE JQuery - Getters y Setters</h1>
+    <p id="parrafo1">Párrafo de prueba</p>
+    <div>Contenido del DIV</div>
+</body>
+<script src='https://code.jquery.com/jquery-3.1.0.js'></script>
+<script>
+    $(document).ready(function(){
+        //var s=$('.titulo').html(); //muestra el contenido de la clase título (getter)
+      //  var s=$('h1').attr('class'); //nos muestra el nombre de la clase a la que pertenece el elemento (getter)
+        var s=$('p').attr('id');
+        alert(s);
+        $('h1').attr('id',"encabezado1"); //asignamos un nuevo id al h1 (actua como setter)
+        alert($('h1').attr('id'));
+        
+    })
+</script>
+
+</html>
