@@ -24,10 +24,10 @@
       //      $('#icon').addClass('fa-volume-up').removeClass('fa-volume-off');
       //  });
 
-        $('#icon').mousedown(function(){
+        $('#icon').mouseover(function(){
             $('#icon').addClass('fa-volume-off').removeClass('fa-volume-up');
         });
-        $('#icon').mouseup(function(){
+        $('#icon').mouseleave(function(){
             $('#icon').addClass('fa-volume-up').removeClass('fa-volume-off');
         });
     });

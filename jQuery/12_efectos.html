@@ -9,7 +9,7 @@
 <body>
     <h1 class="titulo">PRUEBAS DE JQuery - Getters y Setters</h1>
     <p id="parrafo1" class="titulo">Párrafo de prueba</p>
-    <img id="avatar" src="/jQuery/img/avatarJPC2019.jpg" width="400"  alt="">
+    <img id="avatar" src="img/avatarJPC2019.jpg" width="400"  alt="">
     <button id="btnMostrar">Mostrar imagen</button>
     <button id="btnOcultar">Ocultar imagen</button>
     <div>Contenido del DIV</div>
@@ -19,14 +19,14 @@
     $(document).ready(function(){
         //Efectos
         $('#btnMostrar').click(function(){
-            //$('#avatar').slideDown(3000);
-           // $('#avatar').fadeIn(3000);
-            $('#avatar').animate({height: "1000px"},3000);
+           // $('#avatar').slideDown(3000);
+            $('#avatar').fadeIn(3000);
+           // $('#avatar').animate({height: "1000px"},3000);
         });
         $('#btnOcultar').click(function(){
-            //$('#avatar').slideUp(3000);
-            //$('#avatar').fadeOut(3000);
-            $('#avatar').animate({height: "300px"},3000);
+           // $('#avatar').slideUp(3000);
+            $('#avatar').fadeOut(3000);
+            //$('#avatar').animate({height: "300px"},3000);
         });
 
         
