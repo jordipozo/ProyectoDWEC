@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/jordipozo/ProyectoDWEC#readme",
   "dependencies": {
+    "chalk": "^3.0.0",
     "eslint-plugin-html": "^6.0.0"
   }
 }
