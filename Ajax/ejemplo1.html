@@ -19,8 +19,12 @@
                     httpRequest.send(null);
 
                     function procesarCambioEstado() {
-                    console.log("Ha cambiado el estado de la petición");
+                      if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                        console.log("Respuesta recibida. Estado actual:", httpRequest.readyState);
+                      } else {
+                        console.log("Sin respuesta... Estado actual:", httpRequest.readyState);
                     }
+                  }
              </script> 
             </head> 
         <body> 

@@ -1,0 +1,55 @@
+<!DOCTYPE html> 
+<html> 
+     <head> 
+       <meta charset="utf−8"> 
+       <title>Comprobación creación objeto AJAX - según modelo navegador</title>
+        <script> 
+         if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ 
+           httpRequest = new XMLHttpRequest();
+            console.log("Creado el objeto a partir de XMLHttpRequest."); 
+             } else if (window.ActiveXObject) { // IE 6 i anteriors 
+              httpRequest = new ActiveXObject("Microsoft.XMLHTTP"); 
+              console.log("Creado el objeto a partir d’ActiveXObject."); 
+           } else { 
+                console.error("Error: Este navegador no admite AJAX."); 
+                 } 
+                 httpRequest.onreadystatechange = procesarCambioEstado;
+                 httpRequest.onprogress = mostrarProgreso;
+                 httpRequest.open('GET', 'provincias.xml', true);
+                 httpRequest.send(null);
+
+                  function procesarCambioEstado() {
+                    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                      console.log("Respuesta recibida. Estado actual:", httpRequest.readyState);
+                        if (httpRequest.status === 200) {
+                            console.log("Respuesta recibida correctamente. Estado de respuesta:", httpRequest.status);
+ 
+                            procesarRespuesta(httpRequest.responseText);
+                        } else {
+                            console.log("Error en la obtención de la respuesta. Estado de respuesta:", httpRequest.status)
+                        }                        
+                    } else {
+                      console.log("Sin respuesta... Estado actual:", httpRequest.readyState);
+                  }
+                }
+                function procesarRespuesta(respuesta) {
+                    var elementPre = document.createElement('pre');
+                    elementPre.innerHTML = respuesta;
+                    document.body.appendChild(elementPre);
+                }
+                
+ 
+                function mostrarProgreso(event) {
+                    if (event.lengthComputable) {
+                        var progreso = 100 * event.loaded / event.total;
+                        console.log("Completado: " + progreso + "%")
+                    } else {
+                        console.log("No se puede calcular el progreso");
+                    }
+                }
+
+           </script> 
+          </head> 
+      <body> 
+      </body>
+</html>
