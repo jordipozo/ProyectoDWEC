@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .cubo{
+            position: absolute;
+            background-color:black;
+            width: 50px;
+            height: 50px;
+            margin-top: 5%;
+        }
+    </style>
+   
+ <center>
+    <button id="left" class="fa fa-backward"></button>
+    <button id="right" class="fa fa-forward"></button>
+    <button id="up" class="fa fa-caret-up"></button>
+    <button id="down" class="fa fa-caret-down"></button>
+    <div class="cubo"></div>
+ </center>
+</body>
+<script src='https://code.jquery.com/jquery-3.1.0.js'></script>
+<script src='https://use.fontawesome.com/e622d3b53e.js'></script>
+<script>
+    $(document).ready(function(){
+        //Animación 1 - metodo animate
+        $('#left').click(function(){
+            $('.cubo').animate({'left':'-=50px'})
+            console.log('left');
+        });
+        $('#right').click(function(){
+            $('.cubo').animate({'left':'+=50px'})
+            console.log('right');
+        });
+        $('#up').click(function(){
+            $('.cubo').animate({'top':'-=50px'})
+            console.log('up');
+        });
+        $('#down').click(function(){
+            $('.cubo').animate({'top':'+=50px'})
+            console.log('down');
+        });
+
+    });
+</script>
+</html>

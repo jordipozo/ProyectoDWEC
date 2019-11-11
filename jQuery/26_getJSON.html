@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style="height: 1500px;">
+<center>
+    <h1>GET con JSON</h1>
+    <input type="submit" value="Ejecutar" id="exe">
+    <h3 id="resul"></h3>
+</center>
+</body>
+<script src='https://code.jquery.com/jquery-3.4.1.min.js' type='text/javascript'></script>
+
+<script>
+    $(document).ready(function(){
+        //Ajax inicial - método Get usando JSON
+        $('#exe').click(function(){
+            $.getJSON('http://localhost/ajax/ejemplo3/ejemplo3.php',{
+                nombre:"Jordi",
+                metodo:"get"
+
+            },function(datos){
+                $.each(datos,function(i,value){
+                    console.log(i+": "+value);
+                });
+            });
+        });
+        
+    });
+</script>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style="height: 1500px;">
+<center>
+    <h1>Ejemplo AJAX completo</h1>
+    <input type="text" id="valor1">
+    <input type="text" id="valor2">
+    <input type="submit" value="Sumar" id="exe">
+    <h3 id="resul"></h3>
+</center>
+</body>
+<script src='https://code.jquery.com/jquery-3.4.1.min.js' type='text/javascript'></script>
+
+<script>
+    $(document).ready(function(){
+        //Ajax ejemplo completo
+        $('#exe').click(function(){
+            sumar($('#valor1').val(),$('#valor2').val());
+        });
+        function sumar(val1,val2){
+            var parametros={
+                "val1":val1,
+                "val2":val2
+            }
+            $.ajax({
+                data:parametros,
+                url:"http://localhost/ajax/ejemplo3/suma.php",
+                type:"post",
+                beforeSend:function(){
+                    console.log("Petición en proceso");
+                }
+            })
+            .done(function(datos){
+                $('#resul').text("Resultado: " +datos);
+            });
+        }
+        
+    });
+</script>
+</html>
