@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='https://code.jquery.com/jquery-3.4.1.min.js' type='text/javascript'></script>
+    <script type="text/javascript"> 
+        //Función que envía la petición ajax.
+        function buscar_codigo(){
+           $.ajax({
+              url: 'buscar_empleado.php',
+              type: 'POST',
+              timeout: 10000,
+              data: {codigo: $("#codigo").val()},
+              beforeSend: function(){
+                 $("#respuesta").html('Buscando codigo...');
+              },
+              error: function(){
+                 $("#respuesta").html('');
+                    alert('Ha surgido un error.')
+                 },
+              success: function(respuesta){
+                 $("#respuesta").html(respuesta);
+              }
+           })
+        } 
+        $(document).ready(function(){
+           $("#boton_buscar_codigo").click(function(){
+              buscar_codigo();
+           });
+        });
+    </script>
+</head>
+<body>
+    <form action="javascript:void(0);">
+        <label> Buscar empleado por codigo: </label>
+        <input type="text" name="codigo" id="codigo" />
+        <input type="submit" id="boton_buscar_codigo" />
+        <div id="respuesta"></div>
+    </form>
+</body>
+</html>
