@@ -24,18 +24,22 @@
     $(document).ready(function(){
         //Crear, copiar, mover y borrar 
         $('#exe').click(function(){
+        //--Creación de elementos - Activar solo una linea de código cada vez para ver el funcionamiento del método
           //  $('ol').append('<li>Nuevo Elemento</li>'); //añade elemento después del último elemento de la lista ordenada
           //  $('ol').prepend('<li>Nuevo Elemento</li>'); //añade elemento antes del primer elemento de la lista ordenada
           //  $('ol').append($('ol li:first')); //mueve los elementos de la lista, moviendo el primer elemento a la última posición
          // $('ol').prepend($('ol li:last')); //mueve los elementos de la lista, moviendo el último elemento a la primera posición
+         //---------
 
          //---- Copiar elemento --
         //   var clon=$('ol li:last').text();
         //   $('h1').append(clon)     //copiamos el contenido del elemento de la lista a h1
         // --------
-
-        $('ol li:last').remove(); //eliminamos el último elemento de la lista
         
+        
+        //---- Eliminación elementos ----
+        $('ol li:last').remove(); //eliminamos el último elemento de la lista
+        // -------
         });
 
         
