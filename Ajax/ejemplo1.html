@@ -4,7 +4,7 @@
          <meta charset="utf−8"> 
          <title>Comprobación creación objeto AJAX - según modelo navegador</title>
           <script> 
-           if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ 
+           if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+  --- USAMOS XMLHttpRequest, ya que no cargamos JQuery
              httpRequest = new XMLHttpRequest();
               console.log("Creado el objeto a partir de XMLHttpRequest."); 
                } else if (window.ActiveXObject) { // IE 6 i anteriors 

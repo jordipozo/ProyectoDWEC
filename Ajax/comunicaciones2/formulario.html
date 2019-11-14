@@ -7,22 +7,27 @@
     <title>Document</title>
     <script src='https://code.jquery.com/jquery-3.4.1.min.js' type='text/javascript'></script>
     <script type="text/javascript"> 
-        //Función que envía la petición ajax. -- Aquí usamos JQuery ---
+        //Función que envía la petición ajax.
         function buscar_codigo(){
            $.ajax({
               url: 'buscar_empleado.php',
               type: 'POST',
               timeout: 10000,
               data: {codigo: $("#codigo").val()},
+              dataType: 'JSON', // aquí "decodificamos" el JSON
               beforeSend: function(){
                  $("#respuesta").html('Buscando codigo...');
               },
               error: function(){
                  $("#respuesta").html('');
-                    alert('Ha surgido un error.')
-                 },
+                 alert('Ha surgido un error.')
+              },
               success: function(respuesta){
-                 $("#respuesta").html(respuesta);
+                 if(respuesta){
+                    $("#respuesta").html('Nombre y apellido: ' + respuesta.nombre + ' ' + respuesta.apellido + ' / Departamento: ' + respuesta.departamento);
+                 }else{
+                    $("#respuesta").html('El numero de codigo no le corresponde a ningun empleado');
+                 }
               }
            })
         } 
@@ -30,7 +35,7 @@
            $("#boton_buscar_codigo").click(function(){
               buscar_codigo();
            });
-        });
+        }); 
     </script>
 </head>
 <body>
