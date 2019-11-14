@@ -63,10 +63,13 @@
             //console.log($llistaDesplegable);
 
             for (var i = 0; i < resposta.length; i++) {
-                var $item = processarDada(resposta[i]);
+                console.log(resposta[i]);
+                var $item = processarDada(resposta[i]);//problema por aqui
                 dades[resposta[i].Id] = resposta[i];
+                console.log(dades[i].Id);
                 
                 $llistaDesplegable.append($item);
+                console.log($item);
             }
 
             $llistaDesplegable.on('change', actualitzarDadesMostrades);
