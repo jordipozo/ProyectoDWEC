@@ -28,7 +28,7 @@
 </html>
 
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(document).ready(function(){ 
 		$('#btnguardar').click(function(){
 			var datos=$('#frmajax').serialize();
 			$.ajax({
@@ -42,7 +42,7 @@
 						alert("Fallo el server");
 					}
 				}
-			});
+			}); 
 
 			return false;
 		});

@@ -1,5 +1,5 @@
 <?php 
-	$conexion=mysqli_connect('localhost','root','','pruebas');
+	$conexion=mysqli_connect('localhost','jpc','jpc','pruebas');
 
 	$nombre=$_POST['nombre'];
 	$apellido=$_POST['apellido'];
