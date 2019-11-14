@@ -1,0 +1,110 @@
+<html>
+<head>
+        <meta charset="utf-8">
+        <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+      </head>
+      <style>
+        h1 {
+        text-align:center;
+        }
+        
+        fieldset {
+        width: 300px;
+        margin: 0 auto;
+        }
+        label {
+        display: inline-block;
+        width: 150px;
+        font-weight: bold;
+        }
+        span {
+        display: inline-block;
+        width: 150px;
+        }
+        ul {
+        list-style-type: none;
+        padding: 0;
+        }
+      </style>
+      <body>
+        <h1>Activitats de difusió de les fàbriques de creació</h1>
+        <fieldset>
+        <select id="identificador">
+          <option>Selecciona un identificador</option>
+        </select>
+          <ul>
+            <li><label>Id:</label><span id="id"></span></li>
+            <li><label>Any:</label><span id="any"></span></li>
+            <li><label>Equipament:</label><span id="equipament"></span></li>
+            <li><label>Districte:</label><span id="districte"></span></li>
+            <li><label>Ambit:</label><span id="ambit"></span></li>
+            <li><label>Assistents:</label><span id="asistents"></span></li>
+            <li><label>Notes:</label><span id="notes"></span></li>
+            <li><label>Tipus d'equipament:</label><span id="tipusEquipament"></span></li>
+      
+            <li><label>Titularitat:</label><span id="titularitat"></span></li>
+            <li><label>Activitats de difusió dins dels centres:</label><span id="activitats"></span></li>
+          </ul>
+        </fieldset>
+        <script>
+            var dades = {};
+
+            $.ajax({
+            url: 'http://dades.eicub.net/api/1/fabriquescreacio-difusio',
+            beforeSend: function(jqXHR) {
+                jqXHR.overrideMimeType('application/json');
+            },
+            success: processarResposta,
+            dataType: 'json',
+            });
+
+            function processarResposta(resposta, statusText, jqXHR) {
+            var $llistaDesplegable = $('#identificador');
+            //console.log($llistaDesplegable);
+
+            for (var i = 0; i < resposta.length; i++) {
+                var $item = processarDada(resposta[i]);
+                dades[resposta[i].Id] = resposta[i];
+                
+                $llistaDesplegable.append($item);
+            }
+
+            $llistaDesplegable.on('change', actualitzarDadesMostrades);
+            }
+
+            function processarDada(dada) {
+            var $item = $('<option>');
+            $item.attr('value', dada.Id);
+            $item.html(dada.Id);
+            return $item;
+            }
+
+            function actualitzarDadesMostrades(event) {
+            var $llistaDesplegable = $('#identificador');
+            var dades = $llistaDesplegable.val();
+            
+
+            console.log(dades);
+
+            var dada= JSON.stringify(dades);
+            console.log(dada);
+            
+            actualitzarDadaMostrada('id', dada.Id);
+            actualitzarDadaMostrada('any', dada.Any);
+            actualitzarDadaMostrada('equipament', dada.Equipament);
+            actualitzarDadaMostrada('districte', dada.Districte);
+            actualitzarDadaMostrada('ambit', dada.Ambit);
+            actualitzarDadaMostrada('asistents', dada.Assistents);
+            actualitzarDadaMostrada('notes', dada.Notes || 'No hi ha cap nota');
+            actualitzarDadaMostrada('tipusEquipament', dada.TipusEquipament);
+            actualitzarDadaMostrada('titularitat', dada.Titularitat);
+            actualitzarDadaMostrada('activitats', dada.Activitats_de_difusio_dins_dels_centres);
+
+            }
+
+            function actualitzarDadaMostrada(nom, valor) {
+            $('#' + nom).html(valor);
+            }
+        </script>
+      </body>
+</html>
