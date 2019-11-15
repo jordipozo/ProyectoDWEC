@@ -8,7 +8,7 @@
         }
         
         fieldset {
-        width: 300px;
+        width: 400px;
         margin: 0 auto;
         }
         label {
@@ -38,16 +38,16 @@
           <li><label>Id:</label><span id="id"></span></li>
           <li><label>Número:</label><span id="num"></span></li>
           <li><label>Nombre:</label><span id="name"></span></li>
-          <li><label>Imagen:</label><span id="img"></span></li>
+          <li><label>Imagen:</label><a id="img" href="img" target="_blank"></a></li>
           <li><label>Tipo:</label><span id="type"></span></li>
           <li><label>Altura:</label><span id="height"></span></li>
           <li><label>Peso:</label><span id="weight"></span></li>
           <li><label>Candy:</label><span id="candy"></span></li>
           <li><label>Num Candy:</label><span id="candy_count"></span></li>
           <li><label>Huevo:</label><span id="egg"></span></li>
-          <li><label>Spawn chance:</label><span id="spawn_chance"></span></li>
-          <li><label>Spawn average:</label><span id="avg_spawns"></span></li>
-          <li><label>Spawn time:</label><span id="spawn_time"></span></li>
+          <li><label>Opciones de generación:</label><span id="spawn_chance"></span></li>
+          <li><label>Media de generación:</label><span id="avg_spawns"></span></li>
+          <li><label>Tiempo de generación:</label><span id="spawn_time"></span></li>
           <li><label>Multiplicadores:</label><span id="multipliers"></span></li>
           <li><label>Debilidades:</label><span id="weaknesses"></span></li>
           <li><label>Siguiente evolución:</label><span id="next_evolution"></span></li>
@@ -79,14 +79,22 @@
 
  
             function procesarRespuesta() {
-                
-                var respuesta=JSON.parse(httpRequest.responseText);
+                var respuesta=[];
+                 respuesta.push(JSON.parse(httpRequest.responseText));
                 var listaDesplegable=document.getElementById('identificador');
-                console.log(respuesta[pokemon]);
-                for (var i = 0; i < respuesta[pokemon].length; i++){
-                    var item=procesarDato(respuesta[i]);
-                    console.log(respuesta[i].id);
-                    datos[respuesta[i].id]=respuesta[i];
+                //console.log(respuesta[0].pokemon);
+                var respPokemon=[];
+                respuesta.forEach((item)=>{
+                  item.pokemon.forEach((pokemon)=>{
+                    respPokemon.push(pokemon);
+                  });
+                });
+                console.log(respPokemon.length);
+
+                for (var i = 0; i < respPokemon.length; i++){
+                    var item=procesarDato(respPokemon[i]);
+                    console.log(respPokemon[i].id);
+                    datos[respPokemon[i].id]=respPokemon[i];
                     listaDesplegable.appendChild(item);
                 }
               listaDesplegable.onchange= actualizarDatosMostrados;
@@ -101,7 +109,7 @@
 
             function actualizarDatosMostrados(event) {
               var listaDesplegable=document.getElementById("identificador");
-              var dato = dades[listaDesplegable.value];
+              var dato = datos[listaDesplegable.value];
 
               actualizarDatoMostrado('id', dato.id);
               actualizarDatoMostrado('num', dato.num);
@@ -123,7 +131,12 @@
             }
 
             function actualizarDatoMostrado(nom, valor) {
-              document.getElementById(nom).textContent(valor);
+              if(nom=='img'){
+                document.getElementById(nom).textContent='Enlace';
+                document.getElementById(nom).href=valor;
+              }else{
+              document.getElementById(nom).textContent=valor;
+              }
             }
       </script>
     </body>
