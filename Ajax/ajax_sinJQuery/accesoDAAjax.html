@@ -45,9 +45,9 @@
           <li><label>Candy:</label><span id="candy"></span></li>
           <li><label>Num Candy:</label><span id="candy_count"></span></li>
           <li><label>Huevo:</label><span id="egg"></span></li>
-          <li><label>Opciones de generación:</label><span id="spawn_chance"></span></li>
-          <li><label>Media de generación:</label><span id="avg_spawns"></span></li>
-          <li><label>Tiempo de generación:</label><span id="spawn_time"></span></li>
+          <li><label>Ratio de aparición:</label><span id="spawn_chance"></span></li>
+          <li><label>Media de aparición:</label><span id="avg_spawns"></span></li>
+          <li><label>Tiempo de permanencia:</label><span id="spawn_time"></span></li>
           <li><label>Multiplicadores:</label><span id="multipliers"></span></li>
           <li><label>Debilidades:</label><span id="weaknesses"></span></li>
           <li><label>Siguiente evolución:</label><span id="next_evolution"></span></li>
@@ -71,7 +71,7 @@
 
           httpRequest.onreadystatechange  = procesarRespuesta;    
           httpRequest.open('GET', 'https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json',true);
-          httpRequest.overrideMimeType('text/plain');
+          httpRequest.overrideMimeType('application/json');
 
           httpRequest.send(null);
 
