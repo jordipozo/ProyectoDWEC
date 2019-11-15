@@ -1,0 +1,130 @@
+<html>
+<head>
+        <meta charset="utf-8">
+      </head>
+      <style>
+        h1 {
+        text-align:center;
+        }
+        
+        fieldset {
+        width: 300px;
+        margin: 0 auto;
+        }
+        label {
+        display: inline-block;
+        width: 150px;
+        font-weight: bold;
+        }
+        span {
+        display: inline-block;
+        width: 150px;
+        }
+        ul {
+        list-style-type: none;
+        padding: 0;
+        }
+      </style>
+     <head>
+      <meta charset="utf-8">
+    </head>
+    
+    <body>
+      <h1>Listado de POKEMON(AJAX sin JQuery)</h1>
+      <fieldset>
+        <select id="identificador">
+        <option>Selecciona un identificador</option></select>
+        <ul>
+          <li><label>Id:</label><span id="id"></span></li>
+          <li><label>Número:</label><span id="num"></span></li>
+          <li><label>Nombre:</label><span id="name"></span></li>
+          <li><label>Imagen:</label><span id="img"></span></li>
+          <li><label>Tipo:</label><span id="type"></span></li>
+          <li><label>Altura:</label><span id="height"></span></li>
+          <li><label>Peso:</label><span id="weight"></span></li>
+          <li><label>Candy:</label><span id="candy"></span></li>
+          <li><label>Num Candy:</label><span id="candy_count"></span></li>
+          <li><label>Huevo:</label><span id="egg"></span></li>
+          <li><label>Spawn chance:</label><span id="spawn_chance"></span></li>
+          <li><label>Spawn average:</label><span id="avg_spawns"></span></li>
+          <li><label>Spawn time:</label><span id="spawn_time"></span></li>
+          <li><label>Multiplicadores:</label><span id="multipliers"></span></li>
+          <li><label>Debilidades:</label><span id="weaknesses"></span></li>
+          <li><label>Siguiente evolución:</label><span id="next_evolution"></span></li>
+
+          
+        </ul>
+      </fieldset>
+
+      <script>
+          //COMPROBACIÓN COMPATIBILIDAD NAVEGADOR
+          if(window.XMLHttpRequest){
+              httpRequest=new XMLHttpRequest();
+          } else if (window.ActiveXObject){
+              httpRequest=new ActiveXObject("Microsoft.XMLHTTP");
+          } else{
+              console.error("Error: este navegador no es compatible con AJAX");
+          }
+
+
+          var datos = {};
+
+          httpRequest.onload  = procesarRespuesta;    
+          httpRequest.open('GET', 'https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json',true);
+          httpRequest.overrideMimeType('text/plain');
+
+          httpRequest.send(null);
+
+
+
+ 
+            function procesarRespuesta() {
+                
+                var respuesta=JSON.parse(httpRequest.responseText);
+                var listaDesplegable=document.getElementById('identificador');
+                console.log(respuesta[pokemon]);
+                for (var i = 0; i < respuesta[pokemon].length; i++){
+                    var item=procesarDato(respuesta[i]);
+                    console.log(respuesta[i].id);
+                    datos[respuesta[i].id]=respuesta[i];
+                    listaDesplegable.appendChild(item);
+                }
+              listaDesplegable.onchange= actualizarDatosMostrados;
+            }
+
+            function procesarDato(dato) {
+              var item = document.createElement("option");
+              item.setAttribute('value', dato.id);
+              item.textContent=dato.id;
+              return item;
+            }
+
+            function actualizarDatosMostrados(event) {
+              var listaDesplegable=document.getElementById("identificador");
+              var dato = dades[listaDesplegable.value];
+
+              actualizarDatoMostrado('id', dato.id);
+              actualizarDatoMostrado('num', dato.num);
+              actualizarDatoMostrado('name', dato.name);
+              actualizarDatoMostrado('img', dato.img);
+              actualizarDatoMostrado('type', dato.type);
+              actualizarDatoMostrado('height', dato.height);
+              actualizarDatoMostrado('weight', dato.weight);
+              actualizarDatoMostrado('candy', dato.candy);
+              actualizarDatoMostrado('candy_count', dato.candy_count);
+              actualizarDatoMostrado('egg', dato.egg);
+              actualizarDatoMostrado('spawn_chance', dato.spawn_chance);
+              actualizarDatoMostrado('avg_spawns', dato.avg_spawns);
+              actualizarDatoMostrado('spawn_time', dato.spawn_time);
+              actualizarDatoMostrado('multipliers', dato.multipliers);
+              actualizarDatoMostrado('weaknesses', dato.weaknesses);
+              actualizarDatoMostrado('next_evolution', dato.next_evolution);
+
+            }
+
+            function actualizarDatoMostrado(nom, valor) {
+              document.getElementById(nom).textContent(valor);
+            }
+      </script>
+    </body>
+</html>
