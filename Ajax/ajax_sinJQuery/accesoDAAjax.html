@@ -69,7 +69,7 @@
 
           var datos = {};
 
-          httpRequest.onload  = procesarRespuesta;    
+          httpRequest.onreadystatechange  = procesarRespuesta;    
           httpRequest.open('GET', 'https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json',true);
           httpRequest.overrideMimeType('text/plain');
 
@@ -79,6 +79,18 @@
 
  
             function procesarRespuesta() {
+
+              //OPCIONAL - Para controlar estado de comunicaciones
+              //     if (httpRequest.readyState == 4) {
+              //     if (httpRequest.status == 200) {
+              //        // código a procesar ----
+              //     } else {
+              //         alert('Hubo problemas con la petición.');
+              //     }
+              // }
+
+
+
                 var respuesta=[];
                  respuesta.push(JSON.parse(httpRequest.responseText));
                 var listaDesplegable=document.getElementById('identificador');
