@@ -25,6 +25,7 @@
   <body>
     <script>
         $(document).ready(function(){
+          // Configuración del widget acordeón
           $( "#accordion" ).accordion({
                 active: 1
             });
@@ -32,23 +33,36 @@
             
           $( "#accordion" ).accordion( "option", "active", 1 );
 
+          // Configuración del calendario
           $.datepicker.setDefaults($.datepicker.regional["es"]);
           $("#datepicker").datepicker({
-            firstDay:1
+            firstDay:1,
+           
+           // Opciones a mayores
+            showButtonPanel:true,
+            changeMonth:true,
+            changeYear:true,
+            numberOfMonths:2,
+            showWeek:true
           });
 
+
+          // Configuración del cuadro de texto con autocompletar
           $( "#autocompletar" ).autocomplete({
               source: [ "HTML", "CSS", "JavaScript", "PHP", "Python", "SQL", "MySQL"]
           });
           var position = $( "#autocompletar" ).autocomplete( "option", "position" );
           $( "#autocompletar" ).autocomplete( "option", "position", { my : "right top", at: "right bottom" } );
 
+          // Configuración de botón con icono
           $("#button1").button({
                 icons: {
                     primary: "ui-icon ui-icon-scissors",
                     secondary: "ui-icon ui-icon-mail-pencil"
                 }
             });
+
+            // Configuración del cuadro de diálogo
             $(function() { 
               $("#dialog").dialog({ 
                   buttons: { 
@@ -56,10 +70,14 @@
                           $(this).dialog("close"); 
                       } 
                   }, 
-                  title: "Dialog box title" 
+                  title: "Título del cuadro de diálogo" 
               }); 
             });              
+            // Código para los botones de opción
+            $("#radiobutton").buttonset();
 
+            // Código para las pestañas
+            $("div#tabs").tabs();
         })
    </script>
    <h1>EJEMPLO WIDGETS JQUERY-UI</h1>
@@ -93,5 +111,36 @@
         <h4>Caja de dialogo JQuery UI</h4> 
         <p>Esta es una caja de diálogo simple.</p> 
     </div>
+  </br>
+    <div id="radiobutton">
+        <input type="radio" id="radio1" name="radio"/><label for="radio1">Opción 1</label>
+        <input type="radio" id="radio2" name="radio" checked="checked"/><label for="radio2">Opción 2</label>
+        <input type="radio" id="radio3" name="radio"/><label for="radio3">Opción 3</label>
+    </div>
+
+    
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">Pestaña 1</a></li>
+            <li><a href="#tabs-2">Pestaña 2</a></li>
+            <li><a href="#tabs-3">Pestaña 3</a></li>
+        </ul>
+      <div id="tabs-1">
+        <p>
+          Texto para el contenido de la pestaña 1
+        </p>
+      </div>
+      <div id="tabs-2">
+          <p>
+            Texto para el contenido de la pestaña 2
+          </p>
+      </div>
+      <div id="tabs-3">
+          <p>
+            Texto para el contenido de la pestaña 3
+          </p>
+      </div>
+    </div>
+
   </body>
 </html>
