@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Almacenamiento LocalStorage</title>
+    <script>
+        function almacenar(){
+            window.localStorage.setItem("codEmpleado","A-1234");
+            var codigo=localStorage.getItem("codEmpleado");
+
+            window.localStorage.cargo="Empleado raso";
+            var cargo=window.localStorage.cargo;
+            document.getElementById("display").textContent="El empleado con código: "+ codigo+" tiene el cargo de "+cargo;
+        };
+        function limpiarStorage(){
+            sessionStorage.clear();
+            localStorage.clear();
+            document.getElementById("display").textContent="";
+        }
+    </script>
+</head>
+<body>
+    <h3>Métodos de almacenamiento local con LocalStorage</h3>
+    <p id="display"></p>
+    <button id="btnSalir" onclick="almacenar();">Guardar</button>
+    <button id="btnSalir" onclick="limpiarStorage();">Vaciar Storage</button>
+</body>
+</html>

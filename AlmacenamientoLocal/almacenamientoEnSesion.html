@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function almacenar(){
+            sessionStorage.setItem("ticket","Entrada cine sala-1");
+            sessionStorage.setItem("precio","8 €");
+            document.getElementById("display").textContent=sessionStorage.getItem("ticket") +" Precio: "+sessionStorage.getItem("precio");
+        }
+    
+    </script>
+</head>
+<body>
+    <h3>Métodos de almacenamiento local con SessionStorage</h3>
+    <p id="display"></p>
+    <button id="btnSalir" onclick="almacenar();">Guardar</button>
+</body>
+</html>
