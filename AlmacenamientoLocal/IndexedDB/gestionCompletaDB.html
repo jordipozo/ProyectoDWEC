@@ -16,7 +16,9 @@
                 dataBase.onupgradeneeded = function (e) {
 
                     var active = dataBase.result;
-                    var object = active.createObjectStore("people", {keyPath: 'id', autoIncrement: true});
+                    // creamos el almacén de objetos, que será nuestra bd -- createObjectStore (nombre, parametrosOpcionales(indice,tipo,...))
+                    var object = active.createObjectStore("people", {keyPath: 'id', autoIncrement: true}); 
+                    // creamos los índices y establecemos si són o no únicos
                     object.createIndex('by_name', 'name', {unique: false});
                     object.createIndex('by_dni', 'dni', {unique: true});
 
@@ -39,7 +41,7 @@
                 var data = active.transaction(["people"], "readwrite");
                 var object = data.objectStore("people");
 
-                var request = object.put({
+                var request = object.put({    // El método put añade el objeto si no existe y, si existe, lo modifica
                     dni: document.querySelector("#dni").value,
                     name: document.querySelector("#name").value,
                     surname: document.querySelector("#surname").value
@@ -239,6 +241,22 @@
                 };
             }
 
+            function deleteFullDB(){
+                var req = indexedDB.deleteDatabase("object");  // Nombre de la BD - mismo que para método .OPEN
+                req.onsuccess = function () {
+                    console.log("BD borrada satisfactoriamente");
+                    var outerHTML = 'La Base de Datos ha sido eliminada - NO EXISTEN REGISTROS -';
+                    document.querySelector("#elementsList").innerHTML = outerHTML;
+                };
+                req.onerror = function () {
+                    console.log("Error al intentar borrar la BD");
+                };
+                req.onblocked = function () {
+                    console.log("No se puede borrar la BD. Bloqueada por alguna transacción");
+                };
+
+            }
+
         </script>            
     </head>
     <body onload="startDB();">
@@ -267,5 +285,6 @@
         </div>
         <button type="button" onclick="loadAllByName();">Ordenar por nombre</button>
         <button type="button" onclick="loadByDni();">Ordenar por DNI</button>
+        <button type="button" onclick="deleteFullDB();">Eliminar BD</button>
     </body>
 </html>
