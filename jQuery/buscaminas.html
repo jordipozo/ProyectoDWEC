@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>jQuery_100 - Ejercicio: Juego del buscaminas</title>
+		<link rel="icon" type="image/x-icon" href="recursos/favicon.ico">
+		<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+		<style>
+			body {
+				text-align: center
+			}
+
+			#tablero {
+				border: 4px;
+			}
+
+			#tablero th {
+				text-align: center
+			}
+
+
+			#tablero td {
+				border: 2px solid black;
+				width: 20px;
+				height: 20px;
+				text-align: center;
+				vertical-align: middle;
+				background-color: rgb(169, 169, 169);
+				font-size: 16px;
+				font-family: Arial, Helvetica, sans-serif;
+				font-weight: bold;
+			}
+
+			#separacion {
+				height: 5px;
+			}
+
+
+			.intacta {
+				background-color: rgb(169, 169, 169); 
+			}
+
+			.numero {
+				background-color: rgb(169, 169, 169);
+			}
+
+			.antiminamal {
+				background-color: rgb(169, 169, 169);
+			}
+
+			.minastiempo {
+				background-color: black;
+				color: red;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 20px;
+			}
+
+			.descubierta {
+				background-color: rgb(255, 255, 255);
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Juego del buscaminas</h1>
+		<hr />
+
+		<div id="configuracion">
+			<select id="selectTipoJuego">
+				<option value="principiante">Principiante</option>
+				<option value="intermedio">Intermedio</option>
+				<option value="experto">Experto</option>
+				<option value="personalizado">Personalizado</option>
+			</select>
+			<table id="datosPersonalizado" style="display:none" align="center">
+				<tr>
+					<td>Filas<input id="filas" type="number"></td>
+					<td>Columnas<input id="columnas" type="number"></td>
+					<td>Minas<input id="minas" type="number"></td>
+				</tr>
+				<tr>
+					<td colspan="3"><button id="botonEmpezarPersonalizado">Empezar</button></td>
+				</tr>
+			</table>
+		</div>
+
+		<br /><br />
+		
+		<table id="tablero" align="center" cellspacing="0">
+			<thead>
+				<tr>
+					<th>
+						<span id="antiminasPuestas" class="minastiempo" align="left">0</span>
+						<span id="reiniciarJugado" align="center"><button id="botonReiniciarJuego"><img src="recursos/sonrisa.jpg" height="20" width="20"></button></span>
+						<span id="tiempoJugado" class="minastiempo" align="right">0</span>
+					</th>
+				</tr>
+				<tr id="separacion">
+					<th></th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+
+		<div id="resultado"></div>
+
+		<script>
+
+			var Principiante = {
+				nombre: "Principiante",
+				filas:8,
+				columnas:8,
+				minas:10
+			}
+
+			var Intermedio = {
+				nombre: "Intermedio",
+				filas:16,
+				columnas:16,
+				minas:40
+			}
+
+			var Experto = {
+				nombre: "Experto",
+				filas:16,
+				columnas:31,
+				minas:99
+			}
+
+			//Por defecto el tipo de juego es el de principiante
+			var Juego = Principiante;
+			var Personalizado = Principiante;
+			Personalizado.nombre = "Personalizado";
+
+			var Iniciado = false;
+			var Finalizado = false;
+			
+			var TiempoJugado = 0;
+			var EstadoTemporizador;
+
+			var AntiminasPuestas = 0;
+			var CadenaMina = "<img src='recursos/mina.png' width='15' />";
+			var CadenaAntiMina = "<span style='color:yellow;font-size:15px'>X</span>";
+			
+
+			$(function (){
+
+				// ******************************************************************
+				// FUNCIÓN --> ponerMinas
+				// Pone minas en el tablero aleatoriamente salvo en la celda indicada
+				// Parámetros:
+				// identificador de la celda en la que no se pone la mina
+				// Devuelve:
+				// ******************************************************************
+				function ponerMinas(_sinMina) {
+					var celdasMina = [];
+					var n;
+
+					while(celdasMina.length<Juego.minas) {
+						n = Math.floor(Math.random() * Math.floor(Juego.filas*Juego.columnas));
+						if((celdasMina.indexOf(n)==-1) && n!=_sinMina){
+							celdasMina.push(n);
+						}
+					}
+
+					$.each(celdasMina,function(i,v) {
+						$("#"+v).html(CadenaMina);
+					});
+					$("img[src='recursos/mina.png']").hide();
+				};
+				// FIN --> ponerMinas
+
+
+
+				// ************************************************
+				// FUNCIÓN --> calcularMinasAlrededor
+				// Calcula las minas que hay alrededor de una celda
+				// Parámetros:
+				// identificador de la celda
+				// Devuelve:
+				// entero indicando las minas que hay alrededor
+				// ************************************************
+				function calcularMinasAlrededor(_id) {
+					var contador = 0;
+
+					$.each(calcularContorno(_id),function(_indice,_valor) {
+						if(comprobarExistenciaMina(_valor)) {
+							contador++;
+						}
+					});
+
+					return contador;
+				}
+				// FIN --> calcularMinasAlrededor
+
+
+
+				// *************************************************
+				// FUNCIÓN --> esPosibleDescubrir
+				// Comprueba si una celda puede ser descubierta o no
+				// Parámetros:
+				// identificador de la celda
+				// Devuelve:
+				// booleano indicando si la celda se puede descubrir
+				// *************************************************
+				function esPosibleDescubrir(_id) {
+					var porDescubrir = true;
+					
+					if($("#"+_id).is(".descubierta") || $("#"+_id).children().length>0) {
+						porDescubrir = false;
+					}
+
+					return porDescubrir;
+				}
+				// FIN --> esPosibleDescubrir
+
+
+
+				// ********************************************************
+				// FUNCIÓN --> calcularContornoDescubrible
+				// Quita del contorno de la celda aquellas que ya han sido
+				// descubiertas o que no se pueden descubir por el hecho de
+				// contener una mina o una antimina
+				// Parámetros:
+				// array con los identificadores de las celdas del contorno
+				// Devuelve:
+				// array con los identificadores de las celdas del controno
+				// sobre el que se puede aplicar el método descubrirEntorno
+				// ********************************************************
+				function calcularContornoDescubrible(_listaCeldas) {
+					var _listaDescubrir = [];
+
+					$.each(_listaCeldas,function (_indice,_valor) {
+						if(esPosibleDescubrir(_valor)) {
+							_listaDescubrir.push(_valor);
+						}
+					});
+
+					return _listaDescubrir;
+				}
+				// FIN --> calcularContornoDescubrible
+
+
+
+				// ************************************************
+				// FUNCIÓN --> descubrirEntorno
+				// Descubre el entorno de una celda que está vacía.
+				// Supone llamarse de forma recursiva.
+				// Parámetros:
+				// identificador de la celda
+				// Devuelve:
+				// ************************************************
+				function descubrirEntorno(_id) {
+					var minas = 0;
+					var contornoDescubrible = [];
+
+					contornoDescubrible = calcularContornoDescubrible(calcularContorno(_id));
+
+					//console.log("CONTORNO: " + calcularContorno(_id));
+					//console.log("CONTORNO DESCUBRIBLE: " + contornoDescubrible);
+
+					$.each(contornoDescubrible,function(_indice,_valor) {
+						if(!comprobarExistenciaMina(_valor)) {
+							minas = calcularMinasAlrededor(_valor);
+							$("#"+_valor).addClass("descubierta");
+							$("#"+_valor).off("click contextmenu");
+							if(minas>0) {
+								$("#"+_valor).text(minas);
+								switch(minas) {
+									case 1:
+										$("#"+_valor).wrapInner("<span style='color:blue'>");
+										break;
+									case 2:
+										$("#"+_valor).wrapInner("<span style='color:green'>");
+										break;
+									case 3:
+										$("#"+_valor).wrapInner("<span style='color:red'>");
+										break;
+									case 4:
+										$("#"+_valor).wrapInner("<span style='color:darkblue'>");
+										break;
+									default:
+										$("#"+_valor).wrapInner("<span style='color:brown'>");
+										break;
+								}
+							} else {
+								descubrirEntorno(_valor);
+							}
+							$("#"+_valor).css("backgroundColor","white");
+						}
+					});
+				}
+				// FIN --> descubrirEntorno
+
+
+
+				// *****************************************
+				// FUNCIÓN --> comprobarExistenciaMina
+				// Comprueba si existe una mina en una celda
+				// Parámetros:
+				// identificador de la celda
+				// Devuelve:
+				// booleano que indica si hay mina o no
+				// *****************************************
+				function comprobarExistenciaMina(_id) {
+					var mina = false;
+
+					
+						if($("#"+_id).children(":first").is("img")) {
+							mina = true;
+						}
+
+						if($("#"+_id).children(":last").is("img")) {
+							mina = true;
+						}
+					
+					
+
+					return mina;
+				}
+				// FIN --> comprobarExistenciaMina
+
+
+
+				// **********************************************************
+				// FUNCIÓN --> comprobarGanador
+				// Calcula el identificador de celda a partir de una fila y
+				// una columna que se pasan como parámetros.
+				// Parámetros:
+				// Devuelve:
+				// booleano que indica si se ha ganado o no (no se usa)
+				// **********************************************************
+				function comprobarGanador() {
+					var ganado = false;
+					var bien = 0;
+
+					if(parseInt(Juego.minas)==AntiminasPuestas) {
+						$("img[src='recursos/mina.png']").each(function (_indice,_valor) {
+							if($(this).prev().is("span")) {
+								bien++;
+							}
+						});
+					}
+
+					if(bien==parseInt(Juego.minas)) {
+						ganado = true;
+						Finalizado = true;
+						clearInterval(EstadoTemporizador);
+						$("#resultado").html("<h2 style='color:green'>HAS GANADO</h2>");
+					}
+					
+					return ganado;
+				}
+				// FIN --> comprobarGanador
+
+
+
+				// **********************************************************
+				// FUNCIÓN --> calcularId
+				// Calcula el identificador de celda a partir de una fila y
+				// una columna que se pasan como parámetros.
+				// Parámetros:
+				// _fila --> Número de fila (basado en 0)
+				// _columna --> Número de columna (basado en 0)
+				// Devuelve:
+				// entero que indica el identificador de la celda
+				// **********************************************************
+				function calcularId(_fila,_columna) {
+					return (_fila * Juego.columnas) + _columna;
+				}
+				// FIN --> calcularId
+
+
+
+				// **********************************************************
+				// FUNCIÓN --> calcularContorno
+				// Calcula el contorno de la celda que se pasa como parámetro
+				// Parámetros:
+				// _id --> Identificador de la celda
+				// Devuelve:
+				// array con los identificadores de las celdas del contorno
+				// **********************************************************
+				function calcularContorno(_id) {
+					var celdasContorno = [];
+					var filaAnterior, filaActual, filaSiguiente;
+					var columnaAnterior, columnaActual, columnaSiguiente;
+
+					//Calcula fila y columna actual
+					filaActual = Math.trunc(_id/Juego.columnas);
+					columnaActual = _id%Juego.columnas
+
+					//Calcula fila y columna anteriores
+					filaAnterior = filaActual - 1;
+					columnaAnterior = columnaActual - 1;
+
+					//Calcula fila y columna siguientes
+					filaSiguiente = filaActual + 1;
+					columnaSiguiente = columnaActual + 1;
+
+					//Fila anterior
+					if(filaAnterior>=0) {
+						//Columna anterior
+						if(columnaAnterior>=0) {
+							celdasContorno.push(calcularId(filaAnterior,columnaAnterior));
+						}
+
+						//Columna actual
+						celdasContorno.push(calcularId(filaAnterior,columnaActual));
+
+						//Columna siguiente
+						if(columnaSiguiente<Juego.columnas) {
+							celdasContorno.push(calcularId(filaAnterior,columnaSiguiente));
+						}
+					}
+
+					//Fila actual
+					if(columnaAnterior>=0) {
+						celdasContorno.push(calcularId(filaActual,columnaAnterior));
+					}
+					if(columnaSiguiente<Juego.columnas) {
+						celdasContorno.push(calcularId(filaActual,columnaSiguiente));
+					}
+
+					//Fila siguiente
+					if(filaSiguiente<Juego.filas) {
+						//Columna anterior
+						if(columnaAnterior>=0) {
+							celdasContorno.push(calcularId(filaSiguiente,columnaAnterior));
+						}
+
+						//Columna actual
+						celdasContorno.push(calcularId(filaSiguiente,columnaActual));
+
+						//Columna siguiente
+						if(columnaSiguiente<Juego.columnas) {
+							celdasContorno.push(calcularId(filaSiguiente,columnaSiguiente));
+						}
+					}
+
+					return celdasContorno;
+				}
+				// FIN --> calcularContorno
+
+
+
+				// **************
+				// reiniciarJuego
+				// **************
+				function reiniciarJuego(_tipoJuego) {
+					Iniciado = false;
+					Finalizado = false;
+
+					$("#tablero tbody td").off("click");
+					$("#tablero tbody td").off("contextmenu");
+					$("#tablero tbody").html("");
+
+					$("#antiminasPuestas").text(_tipoJuego.minas);
+					$("#tiempoJugado").text("0");
+					$("#resultado").text("");
+					clearInterval(EstadoTemporizador);
+					crearTablero(_tipoJuego);
+				}
+				// FIN reiniciarJuego
+
+
+
+				// *******************************************************
+				// EVENTO --> $("#tablero").contextmenu
+				// *******************************************************
+				// Evita que sobre la tabla se funcione el menú contextual
+				// evento --> contextmenu
+				// *******************************************************
+				$("#tablero").contextmenu(function() {
+					return false;
+				});
+				// FIN EVENTO --> $("#tablero").contextmenu
+
+
+
+				// *************************************************************
+				// CAMBIAR EL TIPO DE JUEGO
+				// EVENTO --> $("#selectTipoJuego").change
+				// *************************************************************
+				// Lanzado por el evento change sobre el select.
+				// Implica reiniciar el juego salvo en el caso del personalizado
+				//**************************************************************
+				$("#selectTipoJuego").change(function (_evento) {
+					$("#datosPersonalizado").hide();
+					
+					switch($("#selectTipoJuego").val()) {
+						case "principiante":
+							reiniciarJuego(Principiante);
+							break;
+						case "intermedio":
+							reiniciarJuego(Intermedio);
+							break;
+						case "experto":
+							reiniciarJuego(Experto);
+							break;
+						case "personalizado":
+							$("#datosPersonalizado").show();
+							break;
+					}
+				});
+				// FIN EVENTO --> $("#selectTipoJuego").change
+
+
+
+				// *************************************************************
+				// EVENTO --> $("#botonReiniciarJuego").click
+				// *************************************************************
+				// Lanzado por el evento change sobre el select.
+				// Implica reiniciar el juego salvo en el caso del personalizado
+				// *************************************************************
+				$("#botonReiniciarJuego").click(function (){
+					reiniciarJuego(Juego);
+				});
+				//FIN EVENTO --> $("#botonReiniciarJuego").click
+
+
+
+				// **************************************************************
+				// EVENTO --> $("#botonEmpezarPersonalizado").click
+				// **************************************************************
+				// Lanzado por el evento click sobre el botón de empezar el juego
+				// personalizado.
+				//**************************************************************
+				$("#botonEmpezarPersonalizado").click(function (){
+					Personalizado.filas = parseInt($("#filas").val());
+					Personalizado.columnas = parseInt($("#columnas").val());
+					Personalizado.minas = parseInt($("#minas").val());
+
+					// -- Validar datos del tablero
+					var errores = "";
+					if(!(Personalizado.filas>=8 && Personalizado.filas<=16))
+						errores += "El número de filas debe estar entre 8 y 16\n";
+					if(!(Personalizado.columnas>=8 && Personalizado.columnas<=31))
+						errores += "El número de columnas debe estar entre 8 y 31\n";
+					if(!(Personalizado.minas <= Personalizado.filas*Personalizado.columnas))
+						errores += "No puede haber más minas que celdas";
+					
+					if(errores.length>0) {
+						alert(errores);
+					} else {
+						reiniciarJuego(Personalizado);
+						//$("#datosPersonalizado").hide();
+					}
+				});
+				// $("#botonEmpezarPersonalizado").click
+
+
+
+				
+
+				// *************************************************
+				// CREA EL TABLERO
+				// Parámetros:
+				// _tipoJuego --> Objeto que recibe el tipo de juego
+				// *************************************************
+				function crearTablero(_tipoJuego) {
+					Juego = _tipoJuego;
+					
+					//Se crean las filas
+					for(i=0;i<Juego.filas;i++) {
+						$("#tablero tbody").append("<tr></tr>");
+					}
+					
+					//Se crean las celdas en cada fila
+					$("#tablero tbody tr").each(function (_index,_element) {
+						for(i=0;i<Juego.columnas;i++) {
+							$(this).append("<td></td>");
+						}
+					});
+
+					//Se pone un ID numérico a cada celda
+					$("#tablero tbody td").attr("id",function (_indice,_elemento) {
+						return _indice;
+					});
+
+					//Se ajusta la cabecera de la tabla
+					$("#tablero thead th").attr("colspan",Juego.columnas);
+
+					//Pulsar el botón izquierdo del ratón
+					$("#tablero tbody td").click(function(_evento) {
+						var pulsada = $(this).attr("id");
+
+						if(!Iniciado) {
+							ponerMinas(pulsada);
+							EstadoTemporizador = setInterval(function () {
+								var segundos = parseInt($("#tiempoJugado").text());
+								segundos++;
+								$("#tiempoJugado").text(segundos);
+							},1000);
+							$("#antiminasPuestas").text(parseInt(Juego.minas-AntiminasPuestas));
+						} else {
+							//Posibilidad de que pulse en la bomba
+							if (!$(this).children(":first").is("span:contains('X')")) {
+								if(comprobarExistenciaMina(pulsada)) {
+									$("img[src='recursos/mina.png']").show();
+									$(this).css("backgroundColor","red");
+									Finalizado = true;
+									clearInterval(EstadoTemporizador);
+									$("#resultado").html("<h2 style='color:red'>HAS PERDIDO</h2>");
+								}
+							}
+							
+						}
+
+						// Se ejecuta siempre que el juego esté desarrollándose
+						if(!Finalizado) {
+							Iniciado = true;
+							if(!$(this).children(":first").is("span:contains('X')")) {
+								var minasContorno = calcularMinasAlrededor(pulsada);
+								if(minasContorno > 0) {
+									$(this).html(minasContorno);
+									switch(minasContorno) {
+										case 1:
+											$(this).wrapInner("<span style='color:blue'>");
+											break;
+										case 2:
+											$(this).wrapInner("<span style='color:green'>");
+											break;
+										case 3:
+											$(this).wrapInner("<span style='color:red'>");
+											break;
+										case 4:
+											$(this).wrapInner("<span style='color:darkblue'>");
+											break;
+										default:
+											$(this).wrapInner("<span style='color:brown'>");
+											break;
+									}
+								} else {
+									// LLamada recursiva al contorno
+									descubrirEntorno($(this).attr("id"));
+								}
+								$(this).css("backgroundColor","white");
+								// La celda ya no está intacta
+								$(this).addClass("descubierta");
+
+								//Quita los eventos para las celdas vacías o con número
+								$(this).off("click contextmenu");
+
+								comprobarGanador();
+							}
+						}
+					});
+
+					
+					//Pulsar el botón derecho del ratón
+					$("#tablero tbody td").contextmenu(function() {
+						if(!Finalizado) {
+							if(Iniciado) {
+								if(!$(this).children(":first").is("span:contains('X')")) {
+									if(parseInt(Juego.minas-AntiminasPuestas)>0) {
+										//Poner antimina
+										$(this).prepend(CadenaAntiMina);
+										AntiminasPuestas++;
+										comprobarGanador();
+									}
+								} else {
+									//Quitar antimina
+									$(this).children("span").remove();
+									AntiminasPuestas--;
+								}
+								$("#antiminasPuestas").text(parseInt(Juego.minas-AntiminasPuestas));
+							} else {
+								//El juego lo permite
+								alert("No es posible empezar poniendo antimina.")
+							}
+						}
+						return false; //Evita el uso del menú contextual
+					});
+				} // FIN crearTablero
+				
+				crearTablero(Juego);
+			}); //FIN
+
+		</script>
+	</body>
+</html>
