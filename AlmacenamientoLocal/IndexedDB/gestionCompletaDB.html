@@ -64,10 +64,12 @@
 
             // Eliminar registro
             function erase(id) {
+                
+               
                 var active = dataBase.result;
                 var data = active.transaction(["people"], "readwrite");
                 var request = data.objectStore("people");
-
+                
     
                 request.delete(parseInt(id));
 
@@ -242,7 +244,11 @@
             }
 
             function deleteFullDB(){
+                
+               dataBase.result.close();
+                
                 var req = indexedDB.deleteDatabase("object");  // Nombre de la BD - mismo que para método .OPEN
+
                 req.onsuccess = function () {
                     console.log("BD borrada satisfactoriamente");
                     var outerHTML = 'La Base de Datos ha sido eliminada - NO EXISTEN REGISTROS -';
