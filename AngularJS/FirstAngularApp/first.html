@@ -1,0 +1,19 @@
+
+<!doctype html>
+<html lang="es" ng-app="firstApp">
+<head>
+    <title>Mi primer script de AngularJS</title>
+</head>
+<body>
+<div ng-controller="FirstController">
+    <span>Nombre:</span>
+    <input type="text" ng-model="first">
+    <input type="text" ng-model="last">
+    <button ng-click="updateMessage()">Mensaje</button>
+    <hr>
+    {{heading + message}}
+</div>
+<script src=https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+<script src="/AngularJS/FirstAngularApp/first.js"></script>
+</body>
+</html>
