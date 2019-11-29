@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="filtros">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cafetería en Angular JS - Filtros</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.1/angular.min.js"></script>
+    <script>
+        var filtros = angular.module('filtros',[])
+    </script>
+</head>
+<body>
+    <h1>Cafetería PEPE JS</h1>
+
+    <h2>Carta de cafés</h2>
+    <h3>Café Americano: {{ 2 | currency:"€"}}</h3>
+    <h3>Café con leche: {{ 1 | currency:"€"}}</h3>
+
+    <h2>También puedes encontrarnos en:</h2>
+    <p> {{ "China" | uppercase }}</p>
+    <p> {{ "ChiLE" | uppercase }}</p>
+    <p> {{ "CROACIA" | uppercase }}</p>
+    <p> {{ "coLOMBia" | uppercase }}</p>
+    <p> {{ "costa rica" | uppercase }}</p>
+</body>
+</html>
