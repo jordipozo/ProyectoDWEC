@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <!-- Reference to the Bing Maps SDK -->
+    <script type='text/javascript'
+            src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+
+    <script type='text/javascript'>
+        navigator.geolocation.getCurrentPosition(success);
+        function success(posicion) {
+            const latitud=posicion.coords.latitude;
+            const longitud=posicion.coords.longitude;
+            console.log(latitud + " "+longitud);
+            GetMap(longitud,latitud);
+        }
+
+        function GetMap(lon,lat)
+        {
+            var map = new Microsoft.Maps.Map('#myMap', {
+                credentials: 'AgyGQIFS45jqa3Y2xvt4nRvBeLtw0i77m85Wa6z4OufnfgQ_eIT14JsiwTp87t_K', //bing personal Key
+                center: new Microsoft.Maps.Location(lat, lon),
+                mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+                zoom: 10
+            });
+
+            //Add your post map load code here.
+        }
+    </script>
+</head>
+<body>
+<div id="myMap" style="position:relative;width:600px;height:400px;"></div>
+</body>
+</html>
