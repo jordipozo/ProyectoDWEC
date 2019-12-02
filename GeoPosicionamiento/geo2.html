@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Geolocalización con Google Maps</title>
+    <style>
+        #mapa{
+            width: 500px;
+            height: 500px;
+        }
+    </style>
+    <script>
+        navigator.geolocation.getCurrentPosition(localizame,gestionError);
+        function localizame(posicion) {
+            posicion.coords.accuracy=10;
+            posicion.enableHighAccuracy=true;
+            const latitud=posicion.coords.latitude;
+            const longitud=posicion.coords.longitude;
+
+            document.getElementById("mapa").src=`http://maps.google.es/maps?hl=es&ie=UTF8&q=${latitud},${longitud}&z=17&output=embed`;
+            //alert('Latitud: '+latitud+' Longitud: '+longitud);
+        }
+        function gestionError(error) {
+            if (error.code === 1){
+                alert("No tengo permiso para acceder a tu posición");
+            } else if(error.code===2){
+                alert("No puedo recuperar la información de tu posición");
+            }else {
+                alert("Se ha producido un error inesperado");
+            }
+        }
+    </script>
+
+</head>
+<body>
+    <iframe id="mapa"></iframe>
+</body>
+</html>
