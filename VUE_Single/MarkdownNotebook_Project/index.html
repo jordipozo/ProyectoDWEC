@@ -7,7 +7,7 @@
     <title>Cuaderno de notas</title>
     <!-- Iconos y hojas de estilo -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="c:/Users/jpozoc/Desktop/DWEC/ProyectosContenidosModulo/ProyectoDWEC/VUE_Single/MarkdownNotebook_Project/style.css"/>
 </head>
 <body>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
@@ -15,17 +15,21 @@
     <script src="https://unpkg.com/marked"></script>
     <!-- Cuaderno (Cuerpo de la aplicación) -->
 
+
     <div id="notebook">
         <!-- Panel principal -->
         <section class="main">
             <textarea v-model="content"></textarea>
         </section>
+        
+        <!-- Panel de vista previa -->
+        <aside class="preview" v-html="notePreview">
+   
+        </aside>
     </div>
-    <!-- Panel de vista previa -->
-    <aside class="preview">
-       {{ notePreview }}
-    </aside>
+
+
     <!-- Código JS -->
-    <script src="script.js"></script>
+    <script src="C:/Users/jpozoc/Desktop/DWEC/ProyectosContenidosModulo/ProyectoDWEC/VUE_Single\MarkdownNotebook_Project/script.js"></script>
 </body>
 </html>

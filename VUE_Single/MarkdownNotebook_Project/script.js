@@ -1,4 +1,5 @@
-new VTTCue({
+new Vue({
+    name:'notebook',
     el:'#notebook',
     data(){
         return{
@@ -10,4 +11,5 @@ new VTTCue({
             return marked (this.content)
         },
     },
+
 })
