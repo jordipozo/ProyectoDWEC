@@ -11,15 +11,20 @@
 </head>
 <body>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
-
+    <!--  Libreria de marcas -->
+    <script src="https://unpkg.com/marked"></script>
     <!-- Cuaderno (Cuerpo de la aplicación) -->
 
     <div id="notebook">
         <!-- Panel principal -->
         <section class="main">
-
+            <textarea v-model="content"></textarea>
         </section>
     </div>
+    <!-- Panel de vista previa -->
+    <aside class="preview">
+       {{ notePreview }}
+    </aside>
     <!-- Código JS -->
     <script src="script.js"></script>
 </body>
