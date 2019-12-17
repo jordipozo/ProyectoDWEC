@@ -101,16 +101,8 @@ input {
 }
 
 .status-bar {
-  color: #777;
-}
-
-.status-bar > span {
-  margin-right: 6px;
-  white-space: nowrap;
-}
-
-.status-bar .label {
-  color: #bbb;
+  color: #999;
+  font-style: italic;
 }
 
 textarea {

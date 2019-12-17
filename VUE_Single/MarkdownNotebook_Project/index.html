@@ -1,35 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cuaderno de notas</title>
-    <!-- Iconos y hojas de estilo -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-    <link rel="stylesheet" href="c:/Users/jpozoc/Desktop/DWEC/ProyectosContenidosModulo/ProyectoDWEC/VUE_Single/MarkdownNotebook_Project/style.css"/>
+  <title>Notebook</title>
+  <!-- Icons & Stylesheets -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <!--  Libreria de marcas -->
-    <script src="https://unpkg.com/marked"></script>
-    <!-- Cuaderno (Cuerpo de la aplicación) -->
+  <!-- Include the library in the page -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!--
+  <script src="https://unpkg.com/browse/marked"></script>
+  -->
+  <!-- Notebook app -->
+  <div id="notebook">
 
+    <!-- Main pane -->
+    <section class="main">
+      <textarea v-model="content"></textarea>
+    </section>
 
-    <div id="notebook">
-        <!-- Panel principal -->
-        <section class="main">
-            <textarea v-model="content"></textarea>
-        </section>
-        
-        <!-- Panel de vista previa -->
-        <aside class="preview" v-html="notePreview">
-   
-        </aside>
-    </div>
+    <!-- Preview pane -->
+    <aside class="preview" v-html="notePreview">
+    </aside>
 
+  </div>
 
-    <!-- Código JS -->
-    <script src="C:/Users/jpozoc/Desktop/DWEC/ProyectosContenidosModulo/ProyectoDWEC/VUE_Single\MarkdownNotebook_Project/script.js"></script>
+  <!-- Some JavaScript -->
+  <script src="script.js"></script>
 </body>
 </html>
