@@ -9,8 +9,10 @@ new Vue({
   data () {
     return {
       // content: 'This is a note',
-      content: localStorage.getItem('content') || 'You can write in **markdown**',
+      content: localStorage.getItem('content') || 'Puedes escribir con **markdown**',
+      notes:[],
     }
+    
   },
 
   // Computed properties
@@ -29,7 +31,7 @@ new Vue({
         localStorage.setItem('content', val)
       },
       immediate: true,
-    },*/
+    },
 
     /*content (val) {
       localStorage.setItem('content', val)
@@ -51,6 +53,17 @@ new Vue({
     },
     reportOperation (opName) {
       console.log('The', opName, 'operation was completed!')
+    },
+    addNote(){
+      const time=Date.now()
+      const note={
+        id:String(time),
+        title:'Nueva nota' + (this.notes.lenght+1),
+        content:'**Hola!** Este bloc usa [markdown] para formatear',
+        created:time,
+        favorite:false,
+      }
+      this.notes.push(note)
     },
   },
 
