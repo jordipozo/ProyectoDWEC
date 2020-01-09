@@ -14,10 +14,18 @@
   -->
   <!-- Notebook app -->
   <div id="notebook">
-
-    <!-- Barra lateral -->
+    <!-- Side bar -->
     <aside class="side-bar">
-      
+        <!-- Tool bar -->
+        <div class="toolbar">
+            <button @click="addNote"><i class="material-icons">add</i>Añadir nota</button>
+        </div>
+        <div class="notes">
+            <!-- Lista de notas -->
+            <div class="note" v-for="note of notes" @click="selectedNote(note)">
+                {{note.title}}
+            </div>
+        </div>
     </aside>
     <!-- Main pane -->
     <section class="main">
