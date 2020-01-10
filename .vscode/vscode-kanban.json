@@ -1,0 +1,43 @@
+{
+  "done": [],
+  "in-progress": [],
+  "testing": [],
+  "todo": [
+    {
+      "assignedTo": {
+        "name": "jordipozo"
+      },
+      "category": "Interfaz",
+      "creation_time": "2020-01-10T20:15:48.871Z",
+      "description": {
+        "content": "Realizar diseño estético de las páginas",
+        "mime": "text/markdown"
+      },
+      "details": {
+        "content": "- [ ] Interfaz alta\n- [ ] Interfaz asignación",
+        "mime": "text/markdown"
+      },
+      "id": "2",
+      "references": [],
+      "title": "Diseño de formularios"
+    },
+    {
+      "assignedTo": {
+        "name": "jordipozo"
+      },
+      "category": "BBDD",
+      "creation_time": "2020-01-10T20:11:18.205Z",
+      "description": {
+        "content": "Diseñar e implementar la base de datos de incidencias",
+        "mime": "text/markdown"
+      },
+      "details": {
+        "content": "- [ ]Diseñar BBDD\n- [ ]Implementar BBDD\n- [ ]Preparar enlace web-BBDD",
+        "mime": "text/markdown"
+      },
+      "id": "1",
+      "references": [],
+      "title": "Preparar base datos incidencias"
+    }
+  ]
+}
