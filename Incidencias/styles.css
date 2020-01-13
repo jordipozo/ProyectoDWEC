@@ -1,0 +1,18 @@
+.inputTextoGrande {
+    width: 500px;
+    height: 300px;
+}
+
+#rightBlock {
+    position: absolute;
+    left: 50%;
+    width: 45%;
+    height: 70%;
+}
+
+#leftBlock {
+    position: absolute;
+    left: 5%;
+    width: 45%;
+    height: 70%;
+}

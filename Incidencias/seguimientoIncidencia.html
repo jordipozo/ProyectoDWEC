@@ -1,26 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Incidencia en seguimiento</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <h2>Seguimiento de incidencia</h2>
-    <p>Código de incidencia:</p>
-    <p>Descripción breve:</p>
-    <p>Usuario cliente:</p>
-    <p>Fecha incidencia:</p>
-    <p>Equipo asignado:</p>
-    <p>Fecha asignación:</p>
-    <p>Gestiones realizadas:</p>
-    <p>Tarea en curso</p>
-    <p>Tarea resuelta</p>
-    <p>Fecha resolución</p>
-    <button id="btnResolucionIncidencia">Resolver</button>
-    <p>Tarea cerrada</p>
-    <button id="btnCerrarIncidencia">Cerrar incidencia</button>
-    <p>Fecha cierre</p>
+    <header>
+        <h2>Seguimiento de incidencia</h2>
+    </header>
+    <nav>
+        <ul>
+            <li>Alta incidencia</li>
+            <li>Seguimiento incidencia</li>
+        </ul>
+    </nav>
+    <section>
+        <div id="leftBlock">
+            <article>
+                <header>Código de incidencia</header>
+                <input id="troubleCode">
+            </article>
+            <article>
+                <header>Descripción breve:</header>
+                <textarea id="descrip" rows="6" cols="50"></textarea>
+            </article>
+            <article>
+                <header>Usuario cliente:</header>
+                <input id="client">
+            </article>
+            <article>
+                <header>Fecha incidencia:</header>
+                <input id="troubleDate">
+            </article>
+        </div>
+        <div id="rightBlock">
+            <p>Equipo asignado:</p>
+            <p>Fecha asignación:</p>
+            <p>Gestiones realizadas:</p>
+            <p>Tarea en curso</p>
+            <p>Tarea resuelta</p>
+            <p>Fecha resolución</p>
+            <button id="btnResolucionIncidencia">Resolver</button>
+            <p>Tarea cerrada</p>
+            <button id="btnCerrarIncidencia">Cerrar incidencia</button>
+            <p>Fecha cierre</p>
+        </div>
+    </section>
+
+
 </body>
+
 </html>
