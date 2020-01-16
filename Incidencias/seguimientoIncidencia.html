@@ -10,15 +10,17 @@
 </head>
 
 <body>
+
     <header>
         <h2>Seguimiento de incidencia</h2>
     </header>
-    <nav>
+    <nav class="navigation">
         <ul>
-            <li>Alta incidencia</li>
-            <li>Seguimiento incidencia</li>
+            <li><a href="..//Incidencias/altaIncidencia.html">Alta incidencia</a></li>
+            <li><a href="..//Incidencias/asignacionIncidencia.html">Asignación incidencia</a></li>
+            <li><a href="..//Incidencias/seguimientoIncidencia.html">Seguimiento incidencia</a></li>
         </ul>
-    </nav>
+    </nav c>
     <section>
         <div id="leftBlock">
             <article>
@@ -37,18 +39,49 @@
                 <header>Fecha incidencia:</header>
                 <input id="troubleDate">
             </article>
+            <article>
+                <header>Equipo asignado:</header>
+                <input id="team">
+            </article>
+            <article>
+                <header>Fecha asignación:</header>
+                <input id="assignDate">
+            </article>
         </div>
         <div id="rightBlock">
-            <p>Equipo asignado:</p>
-            <p>Fecha asignación:</p>
-            <p>Gestiones realizadas:</p>
-            <p>Tarea en curso</p>
-            <p>Tarea resuelta</p>
-            <p>Fecha resolución</p>
-            <button id="btnResolucionIncidencia">Resolver</button>
-            <p>Tarea cerrada</p>
-            <button id="btnCerrarIncidencia">Cerrar incidencia</button>
-            <p>Fecha cierre</p>
+
+            <article>
+                <header>Gestiones realizadas:</header>
+                <textarea cols="20" rows="5" id="task"></textarea>
+            </article>
+            <article>
+                <header>Tarea en curso</header>
+                <input type="checkbox" id="currentTask">
+            </article>
+            <article>
+                <header>Tarea resuelta</header>
+                <input type="checkbox" id="solvedTask">
+            </article>
+            <article>
+                <button id="btnResolucionIncidencia">Resolver</button>
+            </article>
+            <article>
+                <header>Fecha resolución
+                    <header>
+                        <input id="solvedDate">
+            </article>
+
+            <article>
+                <header>Tarea cerrada</header>
+                <input type="checkbox" id="closedTask">
+            </article>
+            <article>
+                <button id="btnCerrarIncidencia">Cerrar incidencia</button>
+            </article>
+            <article>
+                <header>Fecha cierre</header>
+                <input id="closedDate">
+            </article>
         </div>
     </section>
 

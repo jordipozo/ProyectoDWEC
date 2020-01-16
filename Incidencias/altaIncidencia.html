@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<!-- Enlaces a librerias externas jquery -->
+    <!-- Enlaces a librerias externas jquery -->
     <link rel="stylesheet" href="../jQueryUI/css/jquery-ui.theme.css">
     <link rel="stylesheet" href="../jQueryUI/css/jquery-ui.structure.css">
     <link rel="stylesheet" href="../jQueryUI/css/jquery-ui.css">
@@ -13,50 +14,61 @@
     <script type="text/javascript" src="../jQueryUI/js/jquery-ui.js"></script>
     <script type="text/javascript" src="../jQueryUI/js/jquery-ui.min.js"></script>
 
-    
-<!-- -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Gestión de inicidencias internas - ALTA DE INCIDENCIA</title>
 </head>
+
 <body>
     <script type="text/javascript">
-    $(document).ready(function(){
-        //-- Personalización del 'datepicker' a castellano y fecha en formato dd/mm/aaaa (muestra sólo un mes)
-        $.datepicker.regional['es'] = {
-            closeText: 'Cerrar',
-            prevText: '< Ant',
-            nextText: 'Sig >',
-            currentText: 'Hoy',
-            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-            monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-            dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-            dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-            weekHeader: 'Sm',
-            dateFormat: 'dd/mm/yy',
-            firstDay: 1,
-            isRTL: false,
-            showMonthAfterYear: false,
-            yearSuffix: ''
+        $(document).ready(function() {
+            //-- Personalización del 'datepicker' a castellano y fecha en formato dd/mm/aaaa (muestra sólo un mes)
+            $.datepicker.regional['es'] = {
+                closeText: 'Cerrar',
+                prevText: '< Ant',
+                nextText: 'Sig >',
+                currentText: 'Hoy',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+                dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+                weekHeader: 'Sm',
+                dateFormat: 'dd/mm/yy',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
             };
-        $.datepicker.setDefaults($.datepicker.regional['es']);
-     
-        $("#fecha").datepicker();
-        $("#userName").text({});
-        $("#classroomName").text({});
-        $("#troubleDescription").text({});
-        $("#pcID").text({});
-    })
-</script> 
- <h1>Gestión de Incidencias Informáticas Internas - IES Ribera de Castilla</h1>
- <p>Fecha: <input type="text" id="fecha"></p>
- <p>Usuario: <input type="text" id="userName" placeholder="Introduce tu nombre y apellidos"></p>
- <p>Aula:<input type=classroomName placeholder="Aula en la que se encuentra el equipo a reparar"> </p>
- <p>Incidencia: <input type="textarea" id="troubleDescription" placeholder="Describe la incidencia"></p>
- <p>Identificador PC afectado:<input type=pcID placeholder="Identificador del equipo/PC"> </p>
- 
- <button type="submit">Guardar incidencia</button>
+            $.datepicker.setDefaults($.datepicker.regional['es']);
+
+            $("#fecha").datepicker();
+            $("#userName").text({});
+            $("#classroomName").text({});
+            $("#troubleDescription").text({});
+            $("#pcID").text({});
+        })
+    </script>
+    <h1>Gestión de Incidencias Informáticas Internas - IES Ribera de Castilla</h1>
+    <nav class="navigation">
+        <ul>
+            <li><a href="..//Incidencias/altaIncidencia.html">Alta incidencia</a></li>
+            <li><a href="..//Incidencias/asignacionIncidencia.html">Asignación incidencia</a></li>
+            <li><a href="..//Incidencias/seguimientoIncidencia.html">Seguimiento incidencia</a></li>
+        </ul>
+    </nav c>
+    <div id="leftBlock">
+        <p>Fecha: <input type="text" id="fecha"></p>
+        <p>Usuario: <input type="text" id="userName" placeholder="Introduce tu nombre y apellidos"></p>
+        <p>Aula:<input type=classroomName placeholder="Aula en la que se encuentra el equipo a reparar"> </p>
+        <p>Incidencia: <input type="textarea" id="troubleDescription" placeholder="Describe la incidencia"></p>
+        <p>Identificador PC afectado:<input type=pcID placeholder="Identificador del equipo/PC"> </p>
+
+        <button type="submit">Guardar incidencia</button>
+    </div>
 </body>
+
 </html>

@@ -3,8 +3,24 @@
     height: 300px;
 }
 
+.navigation {
+    padding: 0;
+}
+
+.navigation li {
+    display: inline;
+    font-family: Arial;
+    font-size: 11px;
+    text-decoration: none;
+    float: left;
+    padding: 10px;
+    background-color: hsl(140, 70%, 43%);
+    color: #fff;
+}
+
 #rightBlock {
     position: absolute;
+    top: 15%;
     left: 50%;
     width: 45%;
     height: 70%;
@@ -13,6 +29,12 @@
 #leftBlock {
     position: absolute;
     left: 5%;
+    top: 15%;
     width: 45%;
     height: 70%;
+}
+
+body {
+    background-size: cover;
+    background-image: url(../Incidencias/images/ribera.jpg)
 }
