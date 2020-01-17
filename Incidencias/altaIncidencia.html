@@ -13,6 +13,7 @@
 
     <script type="text/javascript" src="../jQueryUI/js/jquery-ui.js"></script>
     <script type="text/javascript" src="../jQueryUI/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../Incidencias/queries.js"></script>
 
     <link rel="stylesheet" href="styles.css">
     <!-- -->
@@ -68,7 +69,7 @@
         <textarea id="troubleDesc" cols="50" rows="10" placeholder="Descripción breve de la incidencia"></textarea>
         <p>Identificador PC afectado:<input id="pcID" placeholder="Identificador del equipo/PC"></p>
 
-        <button type="submit">Guardar incidencia</button>
+        <button onclick="insertarRegistro()">Guardar incidencia</button>
     </div>
 </body>
 
