@@ -12,7 +12,7 @@ $userId=1;
 //$solDate=$_POST['password'];
 
 //Insert
-$sql="INSERT into usuarios (codeTask,description,idUser,idAssignedTeam,taskDate,assignDate,idAssociadedtClass,isSolved,isCurrent,solvedDate)
+$sql="INSERT into tbl_incomingincidents (codeTask,description,idUser,idAssignedTeam,taskDate,assignDate,idAssociadedtClass,isSolved,isCurrent,solvedDate,closeDate)
         values ('$codeT','$desc','$userId',NULL,NOW(),NULL,NULL,0,1,NULL,NULL)";
-echo mysqli_query($conexion,$sql);
+echo mysqli_query($con,$sql);
 ?>
