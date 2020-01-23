@@ -1,5 +1,5 @@
 <?php
-$con = new mysqli("localhost", "root", "", "tbl_incomingincidents");
+$con = new mysqli("localhost", "root", "","test");
 if ($con->connect_errno)
 {
     echo "Fallo al conectar a MySQL: (" . $con->connect_errno . ") " . $con->connect_error;

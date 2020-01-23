@@ -6,7 +6,7 @@ function insertarRegistro() {
     $("#respuesta").html("Por favor espera un momento");
     $.ajax({
         type: "POST",
-        dataType: 'html',
+        dataType: "text",
         url: "insert.php",
         data: "fecha=" + fecha + "&usuario=" + usuario + "&aula=" + ubicacion + "&desc=" + descripcion,
         success: function(resp) {
