@@ -11,6 +11,7 @@ function insertarRegistro() {
         data: "fecha=" + fecha + "&usuario=" + usuario + "&aula=" + ubicacion + "&desc=" + descripcion,
         success: function(resp) {
             $('#respuesta').html(resp);
+            console.log(data);
             //Limpiar();
             //Cargar();
         }
